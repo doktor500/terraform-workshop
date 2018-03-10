@@ -1,31 +1,31 @@
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'idea'
-
-repositories {
-    mavenCentral()
-    maven { url 'http://oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url 'http://repo.spring.io/milestone' }
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
 
-buildscript {
-    repositories {
-        maven { url 'http://repo.spring.io/libs-snapshot' }
-        mavenLocal()
-    }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE'
-    }
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.4.13'
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
-    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
-}
-
-jar {
-    baseName = 'app'
+	compile 'org.codehaus.groovy:groovy-all:2.4.14'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
 }
